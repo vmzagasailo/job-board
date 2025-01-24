@@ -14,6 +14,12 @@ RUN apt-get update && apt-get install -y \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# install node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # install composer
@@ -27,3 +33,4 @@ RUN mkdir -p /var/www/storage && \
     chmod -R 777 /var/www/storage
 
 WORKDIR /var/www
+EXPOSE 5173

@@ -16,6 +16,9 @@ services:
             dockerfile: _docker/app/Dockerfile
         volumes:
             - ./:/var/www
+            - /var/www/node_modules
+        ports:
+            - 5173:5173
         depends_on:
             - db
         container_name: project_app
@@ -32,3 +35,7 @@ services:
             - 8001:3306
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
         container_name: project_db
+
+networks:
+    default:
+        driver: bridge
