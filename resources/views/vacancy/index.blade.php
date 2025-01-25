@@ -16,8 +16,8 @@
                     <div>{{ $vacancy->location }}</div>
                 </div>
                 <div class="card-tags">
-                    <span class="tag">{{ Str::ucfirst($vacancy->experience) }}</span>
-                    <span class="tag">{{ $vacancy->category}}</span>
+                    <x-tag>{{ Str::ucfirst($vacancy->experience) }}</x-tag>
+                    <x-tag class="tag">{{ $vacancy->category}}</x-tag>
                 </div>
             </div>
 
@@ -73,13 +73,6 @@
         display: flex;
         gap: 4px;
         font-size: 0.75rem;
-    }
-
-    .tag {
-        background-color: #f1f5f9;
-        color: #1e293b;
-        padding: 2px 8px;
-        border-radius: 4px;
     }
 
     .card-description {
