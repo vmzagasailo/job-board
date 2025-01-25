@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
