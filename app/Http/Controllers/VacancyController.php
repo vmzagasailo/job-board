@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vacancy;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
 class VacancyController extends Controller
@@ -10,7 +13,7 @@ class VacancyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('vacancy.index', ['vacancies' => Vacancy::all()]);
     }
@@ -34,9 +37,9 @@ class VacancyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Vacancy $vacancy)
+    public function show(Vacancy $vacancy): Factory|View|Application
     {
-        //
+        return view('vacancy.show', compact('vacancy'));
     }
 
     /**
