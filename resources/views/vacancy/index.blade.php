@@ -1,6 +1,6 @@
 <x-layout>
     @foreach($vacancies as $vacancy)
-        <div class="card">
+        <x-card>
             <div class="card-header">
                 <h2 class="card-title">
                     {{ $vacancy->title }}
@@ -24,20 +24,11 @@
             <p class="card-description">
                 {!! nl2br(e($vacancy->description)) !!}
             </p>
-        </div>
+        </x-card>
     @endforeach
 </x-layout>
 
 <style>
-    .card {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 16px;
-        background-color: #ffffff;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
     .card-header {
         display: flex;
         justify-content: space-between;

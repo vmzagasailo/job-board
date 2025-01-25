@@ -1,8 +1,8 @@
-<article class="body">
+<article class="card">
     {{ $slot }}
 </article>
 <style>
-    .body {
+    .card {
         border-radius: 0.375rem;
         border: 1px solid #cbd5e1;
         padding: 1rem;
