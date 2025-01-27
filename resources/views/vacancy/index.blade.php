@@ -9,7 +9,7 @@
             </div>
             <div>
                 <div class="input-filter">Salary</div>
-                <div class="flex space-x-2">
+                <div class="flex-salary space-salary">
                     <x-text-input name="min_salary" value="" placeholder="From"/>
                     <x-text-input name="max_salary" value="" placeholder="To"/>
                 </div>
@@ -46,6 +46,14 @@
     .input-filter {
         margin-bottom: 0.25rem;
         font-weight: 600;
+    }
+
+    .flex-salary {
+        display: flex;
+    }
+
+    .space-salary > :not([hidden]) ~ :not([hidden]) {
+        margin-left: 0.5rem;
     }
 
 </style>
