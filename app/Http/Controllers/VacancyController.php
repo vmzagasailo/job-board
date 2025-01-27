@@ -23,7 +23,12 @@ class VacancyController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        $vacancies = $this->vacancyService->getVacanciesWithSearch(request('search'));
+        $vacancies = $this->vacancyService
+            ->getVacanciesWithFilter(
+                request('search'),
+                request('min_salary'),
+                request('max_salary'),
+            );
 
         return view('vacancy.index', ['vacancies' => $vacancies]);
     }
