@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vacancy;
+use App\Services\VacancyService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -10,12 +11,21 @@ use Illuminate\Http\Request;
 
 class VacancyController extends Controller
 {
+    protected VacancyService $vacancyService;
+
+    public function __construct(VacancyService $vacancyService)
+    {
+        $this->vacancyService = $vacancyService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): Factory|View|Application
     {
-        return view('vacancy.index', ['vacancies' => Vacancy::all()]);
+        $vacancies = $this->vacancyService->getVacanciesWithSearch(request('search'));
+
+        return view('vacancy.index', ['vacancies' => $vacancies]);
     }
 
     /**

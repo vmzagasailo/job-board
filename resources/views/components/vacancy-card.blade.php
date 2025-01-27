@@ -19,10 +19,6 @@
         </div>
     </div>
 
-    <p class="card-description">
-        {!! nl2br(e($vacancy->description)) !!}
-    </p>
-
     {{ $slot }}
 </x-card>
 
@@ -62,10 +58,5 @@
         display: flex;
         gap: 4px;
         font-size: 0.75rem;
-    }
-
-    .card-description {
-        font-size: 0.875rem;
-        color: #64748b;
     }
 </style>
