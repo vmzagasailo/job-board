@@ -16,9 +16,12 @@ class VacancyService
     public function getVacanciesWithFilter(
         ?string $search = null,
         ?int $minSalary = null,
-        ?int $maxSalary = null
+        ?int $maxSalary = null,
+        ?string $experience = null,
+        ?string $category = null
     ): Collection
     {
-        return $this->vacancyRepository->getFilteredVacancies($search, $minSalary, $maxSalary);
+        return $this->vacancyRepository->getFilteredVacancies(
+            $search, $minSalary, $maxSalary, $experience, $category);
     }
 }

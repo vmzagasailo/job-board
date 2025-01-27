@@ -28,6 +28,8 @@ class VacancyController extends Controller
                 request('search'),
                 request('min_salary'),
                 request('max_salary'),
+                request('experience'),
+                request('category'),
             );
 
         return view('vacancy.index', ['vacancies' => $vacancies]);
