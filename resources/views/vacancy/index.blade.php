@@ -19,7 +19,7 @@
                     <div class="input-filter">Experience</div>
                     <x-radio-group
                         name="experience"
-                        :options="\App\Models\Vacancy::$experience" />
+                        :options="array_combine(array_map('ucfirst',\App\Models\Vacancy::$experience),\App\Models\Vacancy::$experience)" />
 
                 </div>
                 <div><div class="input-filter">Category</div>

@@ -7,11 +7,11 @@
         </span>
     </label>
 
-    @foreach($options as $option)
+    @foreach($optionsWithLabel as $label => $option)
         <label for="{{ $name  }}" class="experience-label">
             <input type="radio" name="{{ $name  }}" value="{{ $option }}"
                 @checked(request($name) === $option)/>
-            <span style="margin-left: 0.5rem;">{{ $option }}</span>
+            <span style="margin-left: 0.5rem;">{{ $label }}</span>
         </label>
     @endforeach
 
