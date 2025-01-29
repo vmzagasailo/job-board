@@ -1,13 +1,25 @@
-<label>
-    <input
-        type="text"
-        placeholder="{{ $placeholder }}"
-        name="{{ $name }}"
-        value="{{ $value }}"
-        id="{{ $name }}"
-        class="custom-input"
-    />
-</label>
+<div style="position: relative">
+    @if ($formId)
+        <button class="close-button"
+            type="button"
+                onclick="document.getElementById('{{ $name }}').value = ''; document.getElementById('{{ $formId }}').submit();">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+
+        </button>
+    @endif
+    <label>
+        <input
+            type="text"
+            placeholder="{{ $placeholder }}"
+            name="{{ $name }}"
+            value="{{ $value }}"
+            id="{{ $name }}"
+            class="custom-input"
+        />
+    </label>
+</div>
 
 <style>
     .custom-input {
@@ -31,5 +43,18 @@
 
     .custom-input:focus {
         border-color: #3B82F6;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 0.22rem;
+        right: 0.125rem;
+        border: none;
+        background-color: white;
+    }
+
+    .close-icon {
+        width: 1.2rem;
+        height: 1.2rem;
     }
 </style>

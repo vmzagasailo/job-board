@@ -2,17 +2,17 @@
     <x-breadcrumbs class="mb"
                    :links="['Vacancies' => route('vacancies.index')]"/>
     <x-card class="x-card">
-        <form action="{{ route('vacancies.index') }}">
+        <form id="filtering-form">
             <div class="custom-grid-filter">
                 <div>
                     <div class="input-filter">Search</div>
-                    <x-text-input name="search" value="{{ request('search') }}" placeholder="Search for any text"/>
+                    <x-text-input name="search" value="{{ request('search') }}" placeholder="Search for any text" form-id="filtering-form"/>
                 </div>
                 <div>
                     <div class="input-filter">Salary</div>
                     <div class="flex-salary space-salary">
-                        <x-text-input name="min_salary" value="{{ request('min_salary') }}" placeholder="From"/>
-                        <x-text-input name="max_salary" value="{{ request('max_salary') }}" placeholder="To"/>
+                        <x-text-input name="min_salary" value="{{ request('min_salary') }}" placeholder="From" form-id="filtering-form"/>
+                        <x-text-input name="max_salary" value="{{ request('max_salary') }}" placeholder="To" form-id="filtering-form"/>
                     </div>
                 </div>
                 <div>
