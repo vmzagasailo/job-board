@@ -2,33 +2,32 @@
 
 namespace App\Repositories;
 
+use App\DTO\VacancyDTO;
 use App\Models\Vacancy;
 use Illuminate\Database\Eloquent\Collection;
 
 class VacancyRepository
 {
-    public function getFilteredVacancies(
-        ?string $search = null,
-        ?int $minSalary = null,
-        ?int $maxSalary = null,
-        ?string $experience = null,
-        ?string $category = null
-    ): Collection
+    public function getFilteredVacancies(VacancyDTO $vacancyDTO): Collection
     {
         return Vacancy::query()
-            ->when(request('search'), function ($query) use ($search) {
-                $query->where(function ($query) use($search) {
-                    $query->where('title', 'like', '%' . $search . '%')
-                        ->orWhere('description', 'like', '%' . $search . '%');
+            ->when($vacancyDTO->search, function ($query) use ($vacancyDTO) {
+                $query->where(function ($query) use ($vacancyDTO) {
+                    $query->where('title', 'like', '%' . $vacancyDTO->search . '%')
+                        ->orWhere('description', 'like', '%' . $vacancyDTO->search . '%');
                 });
-            })->when($minSalary, function ($query) use ($minSalary){
-                $query->where('salary', '>=', $minSalary);
-            })->when($minSalary, function ($query) use ($maxSalary){
-                $query->where('salary', '<=', $maxSalary);
-            })->when($experience, function ($query) use ($experience) {
-                $query->where('experience', $experience);
-            })->when($category, function ($query) use ($category) {
-                $query->where('category', $category);
+            })
+            ->when($vacancyDTO->minSalary, function ($query) use ($vacancyDTO) {
+                $query->where('salary', '>=', $vacancyDTO->minSalary);
+            })
+            ->when($vacancyDTO->maxSalary, function ($query) use ($vacancyDTO) {
+                $query->where('salary', '<=', $vacancyDTO->maxSalary);
+            })
+            ->when($vacancyDTO->experience, function ($query) use ($vacancyDTO) {
+                $query->where('experience', $vacancyDTO->experience);
+            })
+            ->when($vacancyDTO->category, function ($query) use ($vacancyDTO) {
+                $query->where('category', $vacancyDTO->category);
             })
             ->get();
     }

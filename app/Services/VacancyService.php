@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\VacancyDTO;
 use App\Repositories\VacancyRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,15 +14,8 @@ class VacancyService
     {
         $this->vacancyRepository = $vacancyRepository;
     }
-    public function getVacanciesWithFilter(
-        ?string $search = null,
-        ?int $minSalary = null,
-        ?int $maxSalary = null,
-        ?string $experience = null,
-        ?string $category = null
-    ): Collection
+    public function getVacanciesWithFilter(VacancyDTO $vacancyDTO): Collection
     {
-        return $this->vacancyRepository->getFilteredVacancies(
-            $search, $minSalary, $maxSalary, $experience, $category);
+        return $this->vacancyRepository->getFilteredVacancies($vacancyDTO);
     }
 }

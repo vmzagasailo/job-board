@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\VacancyDTO;
 use App\Models\Vacancy;
 use App\Services\VacancyService;
 use Illuminate\Contracts\View\Factory;
@@ -23,13 +24,17 @@ class VacancyController extends Controller
      */
     public function index(): Factory|View|Application
     {
+        $vacancyDTO = new VacancyDTO(
+            search: request('search'),
+            minSalary: request('min_salary'),
+            maxSalary: request('max_salary'),
+            experience: request('experience'),
+            category: request('category'),
+        );
+
         $vacancies = $this->vacancyService
             ->getVacanciesWithFilter(
-                request('search'),
-                request('min_salary'),
-                request('max_salary'),
-                request('experience'),
-                request('category'),
+                $vacancyDTO
             );
 
         return view('vacancy.index', ['vacancies' => $vacancies]);
