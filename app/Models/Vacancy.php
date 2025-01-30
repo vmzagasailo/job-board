@@ -5,9 +5,10 @@ namespace App\Models;
 use Database\Factories\VacancyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -60,4 +61,9 @@ class Vacancy extends Model
         'category',
         'experience',
     ];
+
+    public function employer(): BelongsTo
+    {
+        return $this->belongsTo(Vacancy::class);
+    }
 }
