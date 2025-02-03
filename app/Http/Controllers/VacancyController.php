@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class VacancyController extends Controller
 {
@@ -61,7 +62,7 @@ class VacancyController extends Controller
      */
     public function show(Vacancy $vacancy): Factory|View|Application
     {
-        return view('vacancy.show', compact('vacancy'));
+        return view('vacancy.show', ['vacancy' => $vacancy->load('employer')]);
     }
 
     /**

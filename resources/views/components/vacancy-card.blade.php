@@ -10,7 +10,7 @@
 
     <div class="card-meta">
         <div class="card-meta-info">
-            <div>Company name</div>
+            <div>{{ $vacancy->employer->company_name }}</div>
             <div>{{ $vacancy->location }}</div>
         </div>
         <div class="card-tags">
