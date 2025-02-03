@@ -10,25 +10,36 @@ class VacancyRepository
 {
     public function getFilteredVacancies(VacancyDTO $vacancyDTO): Collection
     {
-        return Vacancy::query()
-            ->when($vacancyDTO->search, function ($query) use ($vacancyDTO) {
-                $query->where(function ($query) use ($vacancyDTO) {
-                    $query->where('title', 'like', '%' . $vacancyDTO->search . '%')
-                        ->orWhere('description', 'like', '%' . $vacancyDTO->search . '%');
-                });
-            })
-            ->when($vacancyDTO->minSalary, function ($query) use ($vacancyDTO) {
-                $query->where('salary', '>=', $vacancyDTO->minSalary);
-            })
-            ->when($vacancyDTO->maxSalary, function ($query) use ($vacancyDTO) {
-                $query->where('salary', '<=', $vacancyDTO->maxSalary);
-            })
-            ->when($vacancyDTO->experience, function ($query) use ($vacancyDTO) {
-                $query->where('experience', $vacancyDTO->experience);
-            })
-            ->when($vacancyDTO->category, function ($query) use ($vacancyDTO) {
-                $query->where('category', $vacancyDTO->category);
-            })
-            ->get();
+        $query = Vacancy::with('employer');
+
+        if ($vacancyDTO->search) {
+            $searchTerm = '%' . $vacancyDTO->search . '%';
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', $searchTerm)
+                    ->orWhere('description', 'like', $searchTerm)
+                    ->orWhereHas('employer', function ($query) use ($searchTerm) {
+                        $query->where('company_name', 'like', $searchTerm);
+                    });
+            });
+        }
+
+        if ($vacancyDTO->minSalary) {
+            $query->where('salary', '>=', $vacancyDTO->minSalary);
+        }
+
+        if ($vacancyDTO->maxSalary) {
+            $query->where('salary', '<=', $vacancyDTO->maxSalary);
+        }
+
+        if ($vacancyDTO->experience) {
+            $query->where('experience', $vacancyDTO->experience);
+        }
+
+        if ($vacancyDTO->category) {
+            $query->where('category', $vacancyDTO->category);
+        }
+
+        return $query->get();
     }
+
 }
