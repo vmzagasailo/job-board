@@ -64,6 +64,6 @@ class Vacancy extends Model
 
     public function employer(): BelongsTo
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsTo(Employer::class);
     }
 }
