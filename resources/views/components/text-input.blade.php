@@ -11,7 +11,7 @@
     @endif
     <label>
         <input
-            type="text"
+            type="{{ $type }}"
             placeholder="{{ $placeholder }}"
             name="{{ $name }}"
             value="{{ $value }}"
