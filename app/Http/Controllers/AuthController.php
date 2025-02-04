@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Routing\Redirector;
 
 class AuthController extends Controller
 {
@@ -27,7 +28,7 @@ class AuthController extends Controller
         return view('auth.create');
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function login(LoginRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -42,8 +43,8 @@ class AuthController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function logout(): Application|Redirector|RedirectResponse
     {
-        //
+        return $this->authService->logout();
     }
 }

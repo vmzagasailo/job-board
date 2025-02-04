@@ -15,5 +15,8 @@ Route::get('vacancies/{vacancy}', [VacancyController::class, 'show'])
 Route::get('auth/create', [AuthController::class, 'create'])
     ->name('auth.create');
 
-Route::post('auth/login', [AuthController::class, 'store'])
+Route::post('auth/login', [AuthController::class, 'login'])
     ->name('auth.login');
+
+Route::delete('auth/logout', [AuthController::class, 'logout'])
+    ->name('auth.logout');

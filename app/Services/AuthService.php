@@ -5,7 +5,8 @@ namespace App\Services;
 use App\DTO\LoginDto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Routing\Redirector;
+use \Illuminate\Foundation\Application;
 
 class AuthService
 {
@@ -22,5 +23,15 @@ class AuthService
             return redirect()->back()
                 ->with('error', 'Invalid credentials');
         }
+    }
+
+    public function logout(): Application|Redirector|RedirectResponse
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
