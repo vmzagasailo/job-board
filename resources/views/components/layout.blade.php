@@ -16,6 +16,7 @@
     </style>
 </head>
 <body class="body">
+    {{ auth()->user()->name  ?? 'Guest'}}
     {{ $slot }}
 </body>
 </html>

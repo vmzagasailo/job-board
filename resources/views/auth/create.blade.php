@@ -3,7 +3,7 @@
         Sign in to your account
     </h1>
     <x-card class="card-padding">
-        <form action="{{ route('auth.store') }}" method="POST">
+        <form action="{{ route('auth.login') }}" method="POST">
             @csrf
             <div class="mb8">
                 <label for="email" class="email-password">

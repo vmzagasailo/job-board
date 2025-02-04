@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\DTO\LoginDto;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Services\AuthService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected AuthService $authService;
+
+    public function __construct(AuthService $authService)
     {
-        //
+        $this->authService = $authService;
     }
 
     /**
@@ -25,36 +27,16 @@ class AuthController extends Controller
         return view('auth.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        //
-    }
+        $data = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $dto = new LoginDto(
+            $data['email'],
+            $data['password']
+        );
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return $this->authService->login($dto);
     }
 
     /**

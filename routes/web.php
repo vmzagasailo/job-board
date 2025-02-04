@@ -12,11 +12,8 @@ Route::get('vacancies', [VacancyController::class, 'index'])
 Route::get('vacancies/{vacancy}', [VacancyController::class, 'show'])
     ->name('vacancies.show');
 
-Route::get('login', fn() => to_route('auth.create'))
-    ->name('login');
-
 Route::get('auth/create', [AuthController::class, 'create'])
     ->name('auth.create');
 
-Route::get('auth/store', [AuthController::class, 'store'])
-    ->name('auth.store');
+Route::post('auth/login', [AuthController::class, 'store'])
+    ->name('auth.login');
