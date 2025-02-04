@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $title
@@ -34,6 +34,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vacancy whereSalary($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vacancy whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vacancy whereUpdatedAt($value)
+ * @property int $employer_id
+ * @property-read \App\Models\Employer $employer
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\JobApplication> $jobApplications
+ * @property-read int|null $job_applications_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Vacancy whereEmployerId($value)
  * @mixin \Eloquent
  */
 class Vacancy extends Model
