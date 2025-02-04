@@ -33,6 +33,14 @@
             @endauth
         </ul>
     </nav>
+
+    @if(session('success'))
+        <div role="alert" class="applying-job-success">
+            <p style="font-weight: bold">Success!</p>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+
     {{ $slot }}
 </body>
 </html>
@@ -60,5 +68,16 @@
         list-style: none;
         display: flex;
         gap: 0.5rem;
+    }
+
+    .applying-job-success {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 0.375rem;
+        border-left: 4px solid rgb(134, 239, 172);
+        background-color: rgb(220, 252, 231);
+        padding: 1rem;
+        color: rgb(22, 163, 74);
+        opacity: 0.75;
     }
 </style>

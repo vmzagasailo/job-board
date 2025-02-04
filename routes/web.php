@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,9 @@ Route::post('auth/login', [AuthController::class, 'login'])
 
 Route::delete('auth/logout', [AuthController::class, 'logout'])
     ->name('auth.logout');
+
+//Route::middleware('auth')->group(function() {
+//});
+    Route::post('vacancy/{vacancy}/application', [JobApplicationController::class, 'store'])
+    ->name('vacancy.application.store');
+    Route::get('vacancy/{vacancy}/application/create', [JobApplicationController::class, 'create']);
