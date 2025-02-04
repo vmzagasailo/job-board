@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Vacancy;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,15 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vacancies', function (Blueprint $table) {
+        Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
-            $table->text('description');
-            $table->unsignedBigInteger('salary');
-            $table->string('location');
-            $table->string('category');
-            $table->enum('experience', Vacancy::$experience);
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Vacancy::class)->constrained();
+
+            $table->unsignedInteger('expected_salary');
 
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vacancies');
+        Schema::dropIfExists('job_applications');
     }
 };
